@@ -1,7 +1,8 @@
+import { Button } from "@/components/ui/button";
 import React from "react";
 
 const LandingPage = () => {
-  return <div>LandingPage</div>;
+  return <div>Landing Page</div>;
 };
 
 export default LandingPage;
