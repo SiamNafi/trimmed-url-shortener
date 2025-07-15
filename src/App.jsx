@@ -7,6 +7,7 @@ import LinkPage from "./pages/LinkPage";
 import RedirectLinkPage from "./pages/RedirectLinkPage";
 import AppLayout from "./layout/AppLayout";
 import UrlProvider from "./context/context";
+import PrivateRoute from "./components/PrivateRoute";
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
@@ -17,7 +18,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <DashBoard />,
+        element: (
+          <PrivateRoute>
+            <DashBoard />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/auth",
@@ -25,7 +30,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/link/:id",
-        element: <LinkPage />,
+        element: (
+          <PrivateRoute>
+            <LinkPage />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/:id",

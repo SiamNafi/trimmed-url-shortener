@@ -15,8 +15,8 @@ import { UrlState } from "@/context/context";
 
 const Header = () => {
   const navigate = useNavigate();
-  const { user, loading } = UrlState();
-  if (loading) return null;
+  // const { user, loading } = UrlState();
+  const user = false;
   return (
     <nav className="flex items-center justify-between py-4">
       <Link to={"/"}>
