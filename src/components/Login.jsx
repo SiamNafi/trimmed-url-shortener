@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,8 +18,10 @@ import Error from "./Error";
 import useFetch from "@/hooks/useFetch";
 import { login } from "@/db/apiAuth";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { UrlState } from "@/context/context";
 
 const Login = () => {
+  const { fetchUser } = UrlState();
   const [error, seterror] = useState([]);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -43,6 +46,7 @@ const Login = () => {
   } = useFetch(login, formData);
   useEffect(() => {
     if (loginError === null || data) {
+      fetchUser();
       navigate(`/dashboard?${longLink ? `createNew=${longLink}` : ""}`);
     }
   }, [data, loginError]);

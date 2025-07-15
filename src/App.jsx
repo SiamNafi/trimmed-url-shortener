@@ -6,6 +6,7 @@ import AuthPage from "./pages/AuthPage";
 import LinkPage from "./pages/LinkPage";
 import RedirectLinkPage from "./pages/RedirectLinkPage";
 import AppLayout from "./layout/AppLayout";
+import UrlProvider from "./context/context";
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
@@ -34,7 +35,11 @@ const router = createBrowserRouter([
   },
 ]);
 const App = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <UrlProvider>
+      <RouterProvider router={router} />;
+    </UrlProvider>
+  );
 };
 
 export default App;

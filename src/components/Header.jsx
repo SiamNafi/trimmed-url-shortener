@@ -11,11 +11,12 @@ import {
 } from "./ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { LinkIcon, LogOut } from "lucide-react";
+import { UrlState } from "@/context/context";
 
 const Header = () => {
   const navigate = useNavigate();
-  const user = false;
-
+  const { user, loading } = UrlState();
+  if (loading) return null;
   return (
     <nav className="flex items-center justify-between py-4">
       <Link to={"/"}>
@@ -32,7 +33,7 @@ const Header = () => {
               <Avatar>
                 <AvatarImage
                   className={"cursor-pointer"}
-                  src="https://github.com/shadcn.png"
+                  src={user?.user_metadata?.profile_pic}
                 />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
