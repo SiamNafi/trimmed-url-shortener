@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -14,10 +14,15 @@ import { Label } from "@/components/ui/label";
 import { BeatLoader } from "react-spinners";
 import * as Yup from "yup";
 import Error from "./Error";
+import useFetch from "@/hooks/useFetch";
+import { login } from "@/db/apiAuth";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const Login = () => {
-  const loading = false;
   const [error, seterror] = useState([]);
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const longLink = searchParams.get("createNew");
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -30,6 +35,17 @@ const Login = () => {
       [name]: value,
     }));
   };
+  const {
+    data,
+    error: loginError,
+    loading,
+    fn: fnLogin,
+  } = useFetch(login, formData);
+  useEffect(() => {
+    if (loginError === null || data) {
+      navigate(`/dashboard?${longLink ? `createNew=${longLink}` : ""}`);
+    }
+  }, [data, loginError]);
   const handleLogin = async () => {
     seterror([]);
     try {
@@ -43,6 +59,7 @@ const Login = () => {
       });
       await schema.validate(formData, { abortEarly: false });
       //   api call
+      await fnLogin();
     } catch (error) {
       const newError = {};
       error?.inner?.forEach((err) => {
@@ -59,7 +76,7 @@ const Login = () => {
           <CardDescription>
             to your account if you already have one
           </CardDescription>
-          <Error message={"Some Error"} />
+          {loginError && <Error message={loginError.message} />}
         </CardHeader>
         <CardContent>
           <form>
