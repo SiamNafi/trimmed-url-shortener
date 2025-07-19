@@ -62,14 +62,14 @@ const LinkPage = () => {
             {url?.title}
           </span>
           <a
-            href={`https://trimmr.in/${link}`}
+            href={`https://trimmed-url-shortener-cfov.vercel.app/${link}`}
             target="_blank"
             className="text-3xl sm:text-4xl text-blue-400 hover:underline cursor-pointer"
           >
-            https://trimmr.in/{link}
+            https://trimmed-url-shortener-cfov.vercel.app/{link}
           </a>
           <a
-            href={`https://trimmr.in/${url?.original_url}`}
+            href={`https://trimmed-url-shortener-cfov.vercel.app/${url?.original_url}`}
             target="_blank"
             className="flex items-center gap-1 hover:underline cursor-pointer"
           >
@@ -84,7 +84,7 @@ const LinkPage = () => {
               variant={"ghost"}
               onClick={() =>
                 navigator.clipboard.writeText(
-                  `https://trimmr.in/${url?.short_url}`
+                  `https://trimmed-url-shortener-cfov.vercel.app/${url?.short_url}`
                 )
               }
             >
