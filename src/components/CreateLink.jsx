@@ -76,7 +76,7 @@ const CreateLink = () => {
   return (
     <div>
       <Dialog
-        open={!!longLink}
+        defaultOpen={longLink}
         onOpenChange={(res) => {
           if (!res) setSearchParams({});
         }}
